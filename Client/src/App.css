@@ -1,0 +1,375 @@
+:root{
+  --col1: #F87474;
+  --col2: #FFB562;
+  --col3: #3AB0FF;
+  --col4: #F9F2ED;
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial;
+  font-size: 13.33px;
+  /* background-color: #3AB0FF; */
+}
+
+#drawingHolder{
+  width: 900px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 80px auto;
+  justify-content: center;
+  align-items: center;
+  border: 2px blue solid;
+  box-shadow:
+		rgba(59, 46, 240, 0.4) 2px 2px,
+		rgba(59, 46, 240, 0.4) 4px 4px,
+		rgba(59, 46, 240, 0.3) 6px 6px;
+  overflow: hidden;
+  transition: 200ms;
+  background-color: white;
+}
+
+#drawingHolder:hover{
+  box-shadow:
+		rgba(59, 46, 240, 0.4) 4px 4px,
+		rgba(59, 46, 240, 0.4) 8px 8px,
+		rgba(59, 46, 240, 0.3) 12px 12px;
+  transition: 150ms;
+}
+
+.canvasHolder{
+  position: relative;
+  margin: 20px;  
+  border: 2px blue solid;
+  overflow: hidden;
+}
+
+#myCanvas{
+  display: block;
+  margin-left: -25px;
+  margin-top: -25px;
+  background-color: transparent;
+  touch-action: none;
+  /* cursor: none; */
+}
+
+#myCanvasOverlay{
+  position: absolute;
+  pointer-events: none;
+  top: -25px;
+  left: -25px;
+  background-color: transparent;
+  touch-action: none;
+}
+
+#myCanvasDisplay{
+  position: absolute;
+  pointer-events: none;
+  top: -25px;
+  left: -25px;
+  background-color: transparent;
+}
+
+#colorPicker{
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+.cursorSizeStyle, .toolsButtons, .navBarButtons, .submitButton{
+  outline: none;
+  padding: none;
+  margin: 4px auto;
+  background-color: transparent;
+  border: 2px solid blue;
+  transition: 100ms;
+}
+
+.toolsButtons{
+  min-width: 30px;
+  min-height: 30px;
+  margin: 4px;
+}
+
+.colorButton{
+  margin: 4px;
+  outline: none;
+  border: 1px blue solid;
+  min-width: 30px;
+  min-height: 30px;
+  transition: 100ms;
+}
+
+.on{
+  border: 2px blue solid;
+}
+
+.colorButton:hover, .on, .cursorSizeStyle:hover, .toolsButtons:hover, #colorSelector:hover, .submitButton:hover, .navBarButtons:hover{
+  box-shadow: rgba(59, 46, 240, 0.8) 2px 2px;
+  transition: 100ms;
+  cursor: pointer;
+}
+
+#colorSelector:hover{
+  cursor: crosshair;
+}
+
+#colorSelector{
+  display: block;
+  margin: 2px auto 10px auto;
+  border: 2px blue solid;
+  background-color: white;
+  transition: 200ms;
+  touch-action: none;
+}
+
+#cursorSizeHolder{
+  display: block;
+}
+
+/* @media only screen and (max-width: 950px) {
+} */
+
+/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+} */
+
+/* Login */
+#OverlayBackground{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--col4);
+}
+
+#Login{
+  margin: 100px auto;
+  z-index: 1;
+  width: 400px;
+  height: max(400px, fit-content);
+  background-color: var(--col1);
+  border: 2px blue solid;
+  transition: 200ms;
+  box-shadow:
+		rgba(59, 46, 240, 0.4) 2px 2px,
+		rgba(59, 46, 240, 0.4) 4px 4px,
+		rgba(59, 46, 240, 0.3) 6px 6px;
+}
+
+@media only screen and (max-width: 400px) {
+  #Login {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+    box-shadow: none;
+  }
+}
+
+#Login:hover{
+  box-shadow:
+		rgba(59, 46, 240, 0.4) 4px 4px,
+		rgba(59, 46, 240, 0.4) 8px 8px,
+		rgba(59, 46, 240, 0.3) 12px 12px;
+}
+
+.pic{
+  display: block;
+  margin: 20px auto;
+  border-radius: 200px;
+  /* border: 2px var(--col4) solid; */
+  box-shadow:
+  rgb(0, 0, 255) 0px 0px 0px 3px;
+  transition: 250ms;
+}
+
+.userHolder:hover .pic, .pic:hover{
+  box-shadow:
+  rgb(0, 0, 255) 0px 0px 0px 3px,
+  rgb(31, 193, 27) 0px 0px 0px 6px,
+  rgb(255, 217, 19) 0px 0px 0px 9px,
+  rgb(255, 156, 85) 0px 0px 0px 12px,
+  rgb(255, 85, 85) 0px 0px 0px 15px;
+  transition: 250ms;
+  cursor: pointer;
+}
+
+.LoginInput{
+  display: block;
+  outline: none;
+  width: 210px;
+  height: 30px;
+  margin: 20px auto 0px auto;
+  border: 2px blue solid;
+  /* background-color: rgba(255,0,0,0.1); */
+}
+
+.submitButton{
+  background-color: white;
+  display: block;
+  margin: 20px auto;
+  padding: 5px;
+  cursor: pointer;
+}
+
+
+/* Users */
+.userHolder{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 2px solid blue;
+  /* font */
+}
+
+#userListHolder{
+  width: 300px;
+  border: 2px solid blue;
+  /* height: 50%; */
+  overflow: scroll;
+  /* background-color: #FFC4C4; */
+
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#userListHolder::-webkit-scrollbar{
+  display: none;
+}
+
+/* Message */
+#messageBox{
+  /* height: 50%; */
+  width: 300px;
+  border: 2px solid blue;
+  display: grid;
+  grid-template-rows: 85% 15%;
+  background-color: white;
+
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.messageData{
+  font-family: arial;
+  font-size: 15px;
+}
+
+#messages{
+  margin: 10px;
+  border: 1px solid blue;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+#messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+#messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#messageInput{
+  margin: 10px;
+  outline: none;
+  border: 1px solid blue;	
+}
+
+/* Media Queries */
+#roomRef{ 
+  display: grid;
+  grid-template-rows: auto auto auto;
+  /* grid-auto-rows: 1fr; */
+  grid-template-columns: 75% 25%;
+  grid-row-gap: 20px;
+}
+
+#messageBox{
+  height: 310px;
+}
+
+#userListHolder{
+  height: 312px;
+}
+
+#navbar{
+  width: 80%;
+  margin: auto;
+  grid-column: span 2;
+}
+
+#drawingHolder{
+  grid-row: span 2;
+}
+
+@media only screen and (max-width: 1285px) {
+  #roomRef{
+    display: grid;
+    width: fit-content;
+    grid-template-rows: 5% 10% 50%;
+    grid-template-columns: 50% 50%;
+    margin: auto;
+    grid-row-gap: 10px;
+  }
+  
+  #drawingHolder{
+    grid-column: span 2;
+    height: fit-content;
+    margin: 0px;
+  }
+
+  #messageBox{
+    width: 100%;
+    height: 400px;
+  }
+
+  #userListHolder{
+    width: 100%;
+    height: 400px;
+  }
+
+  #navbar{
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  #drawingHolder, #drawingHolder:hover{
+    box-shadow: none;
+  }
+}
