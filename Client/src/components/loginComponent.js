@@ -17,8 +17,6 @@ const LoginComponent = ({ socket, OverlayBackground, roomRef, selfUser }) => {
     }, []);
 
     const createPic = () => {
-        console.log("Creating picture")
-
         let r = Math.random() * 255, g = Math.random() * 255, b = Math.random() * 255;
 
         ctxPic.current.fillStyle = "rgb("+r+","+g+","+b+")";
@@ -54,7 +52,6 @@ const LoginComponent = ({ socket, OverlayBackground, roomRef, selfUser }) => {
 
     const SendData = (getRoom) => {
         const dataSendFunction = (value) => {
-            console.log(value, getRoom);
             updateRoomName(value);
             const user = {
                 "displayPic": canvasPic.current.toDataURL('image/jpeg', 1),
@@ -62,22 +59,14 @@ const LoginComponent = ({ socket, OverlayBackground, roomRef, selfUser }) => {
                 "userID": socket.id,
                 "roomID": value
             }
-            // console.log((JSON.stringify(selfUser.current) !== JSON.stringify(user)));
-            // if(JSON.stringify(selfUser.current) !== JSON.stringify(user)){
-            // }
             selfUser.current = user;
             socket.emit("User", user);
-            console.log("user Updated!", selfUser.current.username, selfUser.current.roomID);
             OverlayBackground.current.style.display = "none";
             roomRef.current.style.display = "";
             if(getRoom === 1) toggleInput(0);
         }
         if(name.length < 3 || roomName === null) return;
         if(getRoom){
-            // socket.emit("GetRoom", {"name": name, "userID": socket.id});
-            // socket.on("RoomValue", value => {
-            //     dataSendFunction(value);
-            // });
             dataSendFunction(socket.id);
         }
         else{
@@ -163,11 +152,12 @@ const LoginComponent = ({ socket, OverlayBackground, roomRef, selfUser }) => {
                 <button className="submitButton"
                 onClick={usernameSubmit}>Enter</button>
 
-                <div style={{margin: "20px auto", width: "300px"}}>
-                    <ul style={{all: "unset", color: "#F9F2ED"}}>
+                <div style={{margin: "20px auto", width: "fit-content"}}>
+                    <ul style={{color: "#F9F2ED", padding: "20px"}}>
                         <li>Username needs to be of length from 3 to 20.</li>
                         <li>Avatar can be changed by clicking on it.</li>
                         <li>Creating room auto generates ID.</li>
+                        <li>Room is deleted when everybody leaves.</li>
                     </ul>
                 </div>
                 

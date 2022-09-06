@@ -35,7 +35,6 @@ const Input = ({ socket, selfUser }) => {
                 }
                 socket.emit("New message", Message);
                 updateMessage('');
-                console.log("enterClicked");
             } 
         }}
         />

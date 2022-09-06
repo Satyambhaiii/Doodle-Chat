@@ -37,7 +37,6 @@ const DrawingBoard = ({ socket, selfUser }) => {
 
         return () => { 
             clearInterval(interval); 
-            console.log("afterClearnup!"); 
         }
     }, []);
 

@@ -7,7 +7,7 @@ import { NavBar } from "./components/navbar"
 import { useRef, useEffect, useState } from "react";
 import io from 'socket.io-client';
 
-const socket = io('https://multiplayer-drawing-chat-room.herokuapp.com/');
+const socket = io("https://multiplayer-drawing-chat-room.herokuapp.com/");
 
 const Room = ({ roomRef, selfUser, OverlayBackground }) => {
   return(
@@ -32,7 +32,6 @@ function App() {
     roomRef.current.style.display = "none";
       socket.on('connect', () => {
           if(socketID.current !== socket.id){
-            console.log("reconnect");
             OverlayBackground.current.style.display = "block";
             roomRef.current.style.display = "none";
             socketID.current = socket.id;

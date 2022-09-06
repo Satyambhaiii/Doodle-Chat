@@ -27,7 +27,6 @@ const connect = (user) => {
 }
 
 const disconnect = (id) => {
-  console.log('user disconnected');
   if (id in users && "roomID" in users[id]) {
     const rID = users[id]["roomID"];
     rooms[rID].delete(id);
@@ -40,11 +39,9 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
 
   const emitData = (roomID, selfID, message, data) => {
     rooms[roomID].forEach(userID => {
-      console.log(userID, message);
       if(userID !== selfID){
         io.to(userID).emit(message, data);
       }
@@ -73,36 +70,50 @@ io.on('connection', (socket) => {
     emitData(Message.roomID, "", "Message", message);
   });
 
+  const updateUserList = (userRoomID) => {
+    const roomUsers = {}
+    for(newUser in users){
+      if(users[newUser].roomID === userRoomID){
+        roomUsers[newUser] = users[newUser];
+      }
+    }
+    emitData(userRoomID, "", "UserListUpdate", roomUsers);
+  }
+
   socket.on("User", (user) => {
     let imageHolder = "";
     if(user.roomID in image === true) imageHolder = image[user.roomID];
     socket.emit("Image", imageHolder);
     connect(user);
-    const roomUsers = {}
-    for(newUser in users){
-      if(users[newUser].roomID === user.roomID){
-        roomUsers[newUser] = users[newUser];
-      }
-    }
-    emitData(user.roomID, "", "UserListUpdate", roomUsers);
+    updateUserList(user.roomID);
     emitData(user.roomID, "", "Message", {"username":"ADMIN", "message": user.username+" connected"});
     socket.emit("UserRecieved", user);
   });
 
   socket.on("Delete", (id) => {
-    console.log("here in delete");
-    disconnect(id);
-    io.emit("UserListUpdate", users);
+    if(id !== null && id in users){
+      let userRoomID = users[id]["roomID"];
+      disconnect(id);
+      updateUserList(userRoomID);
+      if(rooms[userRoomID].size === 0){
+        delete rooms[userRoomID];
+      }
+    }
   })
 
   socket.on('disconnect', () => {
-    console.log("here in disconnect")
-    disconnect(socket.id);
-    io.emit("UserListUpdate", users);
+    if(socket.id !== null && socket.id in users){
+      let userRoomID = users[socket.id]["roomID"];
+      disconnect(socket.id);
+      updateUserList(userRoomID);
+      if(rooms[userRoomID].size === 0){
+        delete rooms[userRoomID];
+      }
+    }
   });
 });
 
 const PORT = process.env.PORT || 3001
 httpServer.listen(PORT, () => {
-  console.log('listening on *:3001');
+  console.log('listening on *:'+PORT);
 });

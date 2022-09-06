@@ -4,7 +4,6 @@ const User = ({ user, id }) => {
     const pic = useRef(null);
     const canvas = useRef(null), ctx = useRef(null);
 
-    console.log(user.username);
     useEffect(() => {
         canvas.current = pic.current;
         ctx.current = canvas.current.getContext('2d');

@@ -5,12 +5,6 @@ import { useRef, useEffect, useState, useContext } from "react";
 const NavBar = ({ socket, OverlayBackground, roomRef, selfUser }) => {
     const roomID = useRef(null);
 
-    const takeBack = () => {
-        OverlayBackground.current.style.display = "block";
-        roomRef.current.style.display = "none";
-        socket.emit("Delete", socket.id);
-    }
-
     const Hover = (value) => {
         if(value === 1){
             roomID.current.style.color = "grey"
@@ -32,7 +26,7 @@ const NavBar = ({ socket, OverlayBackground, roomRef, selfUser }) => {
     const copyToCliboard = () => {
         navigator.clipboard.writeText(selfUser.current.roomID);
         roomID.current.style.color = "grey"
-        roomID.current.innerHTML = "Copied to clipboard!";
+        roomID.current.innerHTML = "Room ID copied to clipboard!";
         setTimeout(() => {
             Hover(0);
         }, 1000)
@@ -40,11 +34,6 @@ const NavBar = ({ socket, OverlayBackground, roomRef, selfUser }) => {
 
     return(
         <div id="navbar" style={{display: "flex", justifyContent: "space-between"}}>
-            {/* <FontAwesomeIcon icon={faArrowLeft} 
-            className="navBarButtons" 
-            onClick={() => takeBack()} 
-            style={{height: "40px", width: "40px", margin: "5px 0px 0px 0px"}}/> */}
-            
             <div style={{height: "40px", width: "auto", margin: "5px 0px 0px 0px", display: "flex", placeItems: "center", fontSize: "20px"}}>
                 Room ID:&nbsp;
                 <div 
