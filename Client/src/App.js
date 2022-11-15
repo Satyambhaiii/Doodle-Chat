@@ -7,7 +7,7 @@ import { NavBar } from "./components/navbar"
 import { useRef, useEffect, useState } from "react";
 import io from 'socket.io-client';
 
-const socket = io("https://multiplayer-drawing-chat-room.herokuapp.com/");
+const socket = io("https://multiplayerdrawingandchatwebsite.onrender.com/");
 
 const Room = ({ roomRef, selfUser, OverlayBackground }) => {
   return(

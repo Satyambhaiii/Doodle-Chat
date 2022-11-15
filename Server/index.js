@@ -10,7 +10,7 @@ const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://multiplayer-drawing-chat-room.herokuapp.com/"
+    origin: "https://multiplayerdrawingandchatwebsite.onrender.com/"
   }
 });
 
