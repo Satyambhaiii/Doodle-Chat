@@ -5,6 +5,14 @@ const app = express();
 app.use(cors());
 app.use(express.static('build'));
 
+app.get('/helloWorld', (req, res) => {
+  res.send("<div>Hello</div>")
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/build/index.html');
+});
+
 const { createServer } = require('http');
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
@@ -33,10 +41,6 @@ const disconnect = (id) => {
     delete users[id];
   }
 }
-
-app.get('/helloWorld', (req, res) => {
-  res.send("<div>Hello</div>")
-});
 
 io.on('connection', (socket) => {
 
