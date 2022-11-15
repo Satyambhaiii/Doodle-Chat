@@ -34,7 +34,7 @@ const disconnect = (id) => {
   }
 }
 
-app.get('/', (req, res) => {
+app.get('/helloWorld', (req, res) => {
   res.send("<div>Hello</div>")
 });
 
