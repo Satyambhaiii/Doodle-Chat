@@ -7,7 +7,7 @@ import { NavBar } from "./components/navbar"
 import { useRef, useEffect, useState } from "react";
 import io from 'socket.io-client';
 
-const socket = io("https://multiplayerdrawingandchatwebsite.onrender.com/");
+const socket = io("http://localhost:3001");
 
 const Room = ({ roomRef, selfUser, OverlayBackground }) => {
   return(
@@ -17,7 +17,7 @@ const Room = ({ roomRef, selfUser, OverlayBackground }) => {
       <Users socket={socket}/>
       <MessageBox socket={socket} selfUser={selfUser}/>
     </div>
-  )
+   )
 }
 
 function App() {
